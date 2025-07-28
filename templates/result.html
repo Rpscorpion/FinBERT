@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #sentimentChart {
+            width: 100%;
+            height: 300px;
+        }
+        #tradingview-widget {
+            width: 100%;
+            height: 610px;
+        }
+    </style>
+</head>
+<body>
+
+     <!-- Preloader -->
+     <div id="preloader">
+        <img src="{{ url_for('static', filename='img/FinBERT.gif') }}" alt="Loading...">
+    </div>
+
+    <nav class="navbar">
+      <div class="logo"><img src="{{ url_for('static', filename='img/FinBERT.png') }}" alt="FinBERT Logo"></div>
+      <div class="nav-links">
+        <a class="rp" href="/">Home</a>
+        <a class="rp" href="https://www.moneycontrol.com/indian-indices/sensex-4.html">Sensex</a>
+        <a class="rp" href="/about-us">About Us</a>
+        <a class="rp" href="/contact-us">Contact Us</a>
+        
+    </div>
+</nav>
+
+  <!-- ...existing code... -->
+   <section>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Sentiment Analysis Result for {{ request.form['ticker'] }}</h1>
+        <div class="mt-4">
+            <canvas id="sentimentChart" class="img-fluid"></canvas>
+        </div>
+        <div class="mt-4">
+            <div id="tradingview-widget" class="tradingview-widget-container"></div>
+        </div>
+        <div class="table-responsive mt-4">
+            {% for table in tables %}
+                {{ table|safe }}
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+   
+
+    <script>
+        var ctx = document.getElementById('sentimentChart').getContext('2d');
+        var sentimentData = JSON.parse('{{ sentiment_data|tojson|safe }}');
+        var sentimentChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(sentimentData),
+                datasets: [{
+                    data: Object.values(sentimentData),
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                var label = tooltipItem.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += tooltipItem.raw;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Function to update TradingView widget
+        function updateTradingViewWidget(ticker) {
+            const widgetContainer = document.getElementById('tradingview-widget');
+            widgetContainer.innerHTML = ''; // Clear previous widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "width": "100%",
+                "height": "610",
+                "symbol": ticker,
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "light",
+                "style": "1",
+                "locale": "en",
+                "withdateranges": true,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "details": true,
+                "calendar": false,
+                "show_popup_button": true,
+                "popup_width": "100",
+                "popup_height": "100",
+                "support_host": "https://www.tradingview.com"
+            });
+
+            widgetContainer.appendChild(script);
+        }
+
+        // Update the TradingView widget with the searched ticker
+        document.addEventListener('DOMContentLoaded', function() {
+            const ticker = '{{ request.form['ticker'] }}';
+            updateTradingViewWidget(ticker);
+        });
+    </script>
+
+
+<footer>
+    <div class="logo"><img src="{{ url_for('static', filename='img/FinBERT.png') }}" alt="FinBERT Logo" height="30" width="auto"></div>
+            <div class="footer-links">
+                <a href="/about-us">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="/contact-us">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+      <p class="disclaimer">
+          Investing in the stock market is subject to market risks. Read all scheme related documents carefully before investing. Past performance is not indicative of future returns.
+      </p>
+      <p>&copy; 2025 FinBERT</p>
+  </footer>
+
+
+  <script>
+    // JavaScript to hide the preloader with a delay
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.getElementById('preloader').style.display = 'none';
+        }, ); // Delay of 2000 milliseconds (2 seconds)
+    });
+</script>
+</body>
+</html>

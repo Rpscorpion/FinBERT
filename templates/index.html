@@ -1,0 +1,551 @@
+<!-- filepath: /c:/Users/Rithik/Project/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinBERT - Finance,Refined</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="{{ url_for('static', filename='img/FinBERT.gif') }}" alt="Loading...">
+    </div>
+
+    <nav class="navbar">
+      <div class="logo"><img src="{{ url_for('static', filename='img/FinBERT.png') }}" alt="FinBERT Logo"></div>
+      <div class="nav-links">
+        <a class="rp" href="/">Home</a>
+        <a class="rp" href="https://www.moneycontrol.com/indian-indices/sensex-4.html">Sensex</a>
+        <a class="rp" href="/about-us">About Us</a>
+        <a class="rp" href="/contact-us">Contact Us</a>
+        
+    </div>
+</nav>
+
+  <!-- ...existing code... -->
+
+
+   <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
+    {
+      "proName": "FOREXCOM:SPXUSD",
+      "title": "S&P 500 Index"
+    },
+    {
+      "proName": "FOREXCOM:NSXUSD",
+      "title": "US 100 Cash CFD"
+    },
+    {
+      "proName": "FX_IDC:EURUSD",
+      "title": "EUR to USD"
+    },
+    {
+      "proName": "BITSTAMP:BTCUSD",
+      "title": "Bitcoin"
+    },
+    {
+      "proName": "BITSTAMP:ETHUSD",
+      "title": "Ethereum"
+    }
+  ],
+  "showSymbolLogo": true,
+  "isTransparent": false,
+  "displayMode": "adaptive",
+  "colorTheme": "light",
+  "locale": "en"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+
+
+<section class="indices">
+  <div class="indices-container">
+      <div class="index">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+              {
+              "symbol": "NASDAQ:NFLX",
+              "width": "300",
+              "isTransparent": false,
+              "colorTheme": "light",
+              "locale": "en"
+              }
+              </script>
+          </div>
+          <!-- TradingView Widget END -->
+      </div>
+      <div class="index">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+              {
+              "symbol": "NASDAQ:NVDA",
+              "width": 300,
+              "isTransparent": false,
+              "colorTheme": "light",
+              "locale": "en"
+              }
+              </script>
+          </div>
+          <!-- TradingView Widget END -->
+      </div>
+      <div class="index">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+              {
+              "symbol": "NASDAQ:AMZN",
+              "width": 300,
+              "isTransparent": false,
+              "colorTheme": "light",
+              "locale": "en"
+              }
+              </script>
+          </div>
+          <!-- TradingView Widget END -->
+      </div>
+      <div class="index">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+              {
+              "symbol": "NASDAQ:META",
+              "width": 300,
+              "isTransparent": false,
+              "colorTheme": "light",
+              "locale": "en"
+              }
+              </script>
+          </div>
+          <!-- TradingView Widget END -->
+      </div>
+  </div>
+</section>
+
+
+<!------------search bar-------->
+<div class="search-container">
+  <form action="/get_news" method="post" id="search-form">
+      <input type="text" id="ticker" name="ticker" placeholder="Enter Stock Ticker" required>
+      <button type="submit" class="search-btn">
+          <span class="search-icon"></span>
+      </button>
+  </form>
+</div>
+<script>
+  $(function() {
+var availableTickers = [
+  { label: "Apple Inc. (AAPL)", value: "AAPL" },
+  { label: "Alphabet Inc. (GOOGL)", value: "GOOGL" },
+  { label: "Amazon.com Inc. (AMZN)", value: "AMZN" },
+  { label: "Microsoft Corporation (MSFT)", value: "MSFT" },
+  { label: "Meta Platforms Inc. (META)", value: "META" },
+  { label: "Tesla Inc. (TSLA)", value: "TSLA" },
+  { label: "NVIDIA Corporation (NVDA)", value: "NVDA" },
+  { label: "Netflix Inc. (NFLX)", value: "NFLX" },
+  { label: "Adobe Inc. (ADBE)", value: "ADBE" },
+  { label: "PayPal Holdings Inc. (PYPL)", value: "PYPL" },
+  { label: "Intel Corporation (INTC)", value: "INTC" },
+  { label: "Cisco Systems Inc. (CSCO)", value: "CSCO" },
+  { label: "Salesforce.com Inc. (CRM)", value: "CRM" },
+  { label: "Advanced Micro Devices Inc. (AMD)", value: "AMD" },
+  { label: "Qualcomm Inc. (QCOM)", value: "QCOM" },
+  { label: "Broadcom Inc. (AVGO)", value: "AVGO" },
+  { label: "Oracle Corporation (ORCL)", value: "ORCL" },
+  { label: "IBM (IBM)", value: "IBM" },
+  { label: "Uber Technologies Inc. (UBER)", value: "UBER" },
+  { label: "Lyft Inc. (LYFT)", value: "LYFT" },
+  { label: "Snap Inc. (SNAP)", value: "SNAP" },
+  { label: "Twitter Inc. (TWTR)", value: "TWTR" },
+  { label: "Pinterest Inc. (PINS)", value: "PINS" },
+  { label: "Zoom Video Communications Inc. (ZM)", value: "ZM" },
+  { label: "Shopify Inc. (SHOP)", value: "SHOP" },
+  { label: "Square Inc. (SQ)", value: "SQ" },
+  { label: "Roku Inc. (ROKU)", value: "ROKU" },
+  { label: "Spotify Technology S.A. (SPOT)", value: "SPOT" },
+  { label: "Palantir Technologies Inc. (PLTR)", value: "PLTR" },
+  { label: "Snowflake Inc. (SNOW)", value: "SNOW" },
+  { label: "CrowdStrike Holdings Inc. (CRWD)", value: "CRWD" },
+  { label: "DocuSign Inc. (DOCU)", value: "DOCU" },
+  { label: "Zscaler Inc. (ZS)", value: "ZS" },
+  { label: "Okta Inc. (OKTA)", value: "OKTA" },
+  { label: "Cloudflare Inc. (NET)", value: "NET" },
+  { label: "Datadog Inc. (DDOG)", value: "DDOG" },
+  { label: "Atlassian Corporation Plc (TEAM)", value: "TEAM" },
+  { label: "ServiceNow Inc. (NOW)", value: "NOW" },
+  { label: "Twilio Inc. (TWLO)", value: "TWLO" },
+  { label: "Slack Technologies Inc. (WORK)", value: "WORK" },
+  { label: "Dropbox Inc. (DBX)", value: "DBX" },
+  { label: "Box Inc. (BOX)", value: "BOX" },
+  { label: "MongoDB Inc. (MDB)", value: "MDB" },
+  { label: "Elastic N.V. (ESTC)", value: "ESTC" },
+  { label: "Splunk Inc. (SPLK)", value: "SPLK" },
+  { label: "New Relic Inc. (NEWR)", value: "NEWR" },
+  { label: "PagerDuty Inc. (PD)", value: "PD" },
+  { label: "Alteryx Inc. (AYX)", value: "AYX" },
+  { label: "Smartsheet Inc. (SMAR)", value: "SMAR" },
+  { label: "Asana Inc. (ASAN)", value: "ASAN" },
+  { label: "Monday.com Ltd. (MNDY)", value: "MNDY" },
+  { label: "GitLab Inc. (GTLB)", value: "GTLB" },
+  { label: "HashiCorp Inc. (HCP)", value: "HCP" },
+  { label: "Confluent Inc. (CFLT)", value: "CFLT" },
+  { label: "Amplitude Inc. (AMPL)", value: "AMPL" },
+  { label: "UiPath Inc. (PATH)", value: "PATH" },
+  { label: "C3.ai Inc. (AI)", value: "AI" },
+  { label: "AppLovin Corporation (APP)", value: "APP" },
+  { label: "Unity Software Inc. (U)", value: "U" },
+  { label: "Roblox Corporation (RBLX)", value: "RBLX" },
+  { label: "Bumble Inc. (BMBL)", value: "BMBL" },
+  { label: "Match Group Inc. (MTCH)", value: "MTCH" },
+  { label: "Duolingo Inc. (DUOL)", value: "DUOL" },
+  { label: "Coursera Inc. (COUR)", value: "COUR" },
+  { label: "Chegg Inc. (CHGG)", value: "CHGG" },
+  { label: "Khan Academy (KHAN)", value: "KHAN" },
+  { label: "Udemy Inc. (UDMY)", value: "UDMY" },
+  { label: "Skillshare Inc. (SKL)", value: "SKL" },
+  { label: "MasterClass Inc. (MSTR)", value: "MSTR" },
+  { label: "LinkedIn Corporation (LNKD)", value: "LNKD" },
+  { label: "Indeed Inc. (INDD)", value: "INDD" },
+  { label: "Glassdoor Inc. (GLDR)", value: "GLDR" },
+  { label: "ZipRecruiter Inc. (ZIP)", value: "ZIP" },
+  { label: "Hired Inc. (HIRED)", value: "HIRED" },
+  { label: "AngelList (ANGEL)", value: "ANGEL" },
+  { label: "Crunchbase Inc. (CRUNCH)", value: "CRUNCH" },
+  { label: "PitchBook Data Inc. (PITCH)", value: "PITCH" },
+  { label: "CB Insights (CBI)", value: "CBI" },
+  { label: "Gartner Inc. (IT)", value: "IT" },
+  { label: "Forrester Research Inc. (FORR)", value: "FORR" },
+  { label: "IDC (IDC)", value: "IDC" },
+  { label: "451 Research (451)", value: "451" },
+  { label: "O'Reilly Media Inc. (ORLY)", value: "ORLY" },
+  { label: "Packt Publishing (PACKT)", value: "PACKT" },
+  { label: "Manning Publications (MANN)", value: "MANN" },
+  { label: "Apress (APRESS)", value: "APRESS" },
+  { label: "Addison-Wesley (AW)", value: "AW" },
+  { label: "Pearson Education (PSON)", value: "PSON" },
+  { label: "McGraw-Hill Education (MHE)", value: "MHE" },
+  { label: "Wiley (WLY)", value: "WLY" },
+  { label: "Springer Nature (SPR)", value: "SPR" },
+  { label: "Elsevier (ELSE)", value: "ELSE" },
+  { label: "Taylor & Francis (TAYL)", value: "TAYL" },
+  { label: "Cambridge University Press (CUP)", value: "CUP" },
+  { label: "Oxford University Press (OUP)", value: "OUP" },
+  { label: "MIT Press (MITP)", value: "MITP" },
+  { label: "Harvard University Press (HUP)", value: "HUP" },
+  { label: "Stanford University Press (SUP)", value: "SUP" },
+  { label: "Yale University Press (YUP)", value: "YUP" },
+  { label: "Princeton University Press (PUP)", value: "PUP" },
+  { label: "Columbia University Press (CUP)", value: "CUP" },
+  { label: "University of Chicago Press (UCP)", value: "UCP" },
+  { label: "Duke University Press (DUP)", value: "DUP" },
+  { label: "Johns Hopkins University Press (JHUP)", value: "JHUP" },
+  { label: "University of California Press (UCAL)", value: "UCAL" },
+  { label: "University of Texas Press (UTP)", value: "UTP" },
+  { label: "University of Pennsylvania Press (UPENN)", value: "UPENN" },
+  { label: "University of Michigan Press (UMICH)", value: "UMICH" },
+  { label: "University of Virginia Press (UVA)", value: "UVA" },
+  { label: "University of North Carolina Press (UNC)", value: "UNC" },
+  { label: "University of Washington Press (UW)", value: "UW" },
+  { label: "University of Toronto Press (UTP)", value: "UTP" },
+  { label: "University of British Columbia Press (UBC)", value: "UBC" },
+  { label: "University of Alberta Press (UAP)", value: "UAP" },
+  { label: "University of Manitoba Press (UMP)", value: "UMP" },
+  { label: "University of Ottawa Press (UOP)", value: "UOP" },
+  { label: "University of Montreal Press (UM)", value: "UM" },
+  { label: "University of Quebec Press (UQ)", value: "UQ" },
+  { label: "University of Western Ontario Press (UWO)", value: "UWO" },
+  { label: "University of Windsor Press (UW)", value: "UW" },
+  { label: "University of Saskatchewan Press (US)", value: "US" },
+  { label: "University of Calgary Press (UC)", value: "UC" },
+  { label: "University of Victoria Press (UV)", value: "UV" },
+  { label: "University of New Brunswick Press (UNB)", value: "UNB" },
+  { label: "University of Prince Edward Island Press (UPEI)", value: "UPEI" },
+  { label: "University of Newfoundland Press (UN)", value: "UN" },
+  { label: "University of Nova Scotia Press (UNS)", value: "UNS" },
+  { label: "University of New Hampshire Press (UNH)", value: "UNH" },
+  { label: "University of Vermont Press (UVT)", value: "UVT" },
+  { label: "University of Maine Press (UM)", value: "UM" },
+  { label: "University of Rhode Island Press (URI)", value: "URI" },
+  { label: "University of Connecticut Press (UCONN)", value: "UCONN" },
+  { label: "University of Massachusetts Press (UMASS)", value: "UMASS" },
+  { label: "University of New York Press (UNY)", value: "UNY" },
+  { label: "University of New Jersey Press (UNJ)", value: "UNJ" },
+  { label: "University of Pennsylvania Press (UPENN)", value: "UPENN" },
+  { label: "University of Delaware Press (UD)", value: "UD" },
+  { label: "University of Maryland Press (UMD)", value: "UMD" },
+  { label: "University of Virginia Press (UVA)", value: "UVA" },
+  { label: "University of North Carolina Press (UNC)", value: "UNC" },
+  { label: "University of South Carolina Press (USC)", value: "USC" },
+  { label: "University of Georgia Press (UGA)", value: "UGA" },
+  { label: "University of Florida Press (UF)", value: "UF" },
+  { label: "University of Alabama Press (UA)", value: "UA" },
+  { label: "University of Mississippi Press (UM)", value: "UM" },
+  { label: "University of Tennessee Press (UT)", value: "UT" },
+  { label: "University of Kentucky Press (UK)", value: "UK" },
+  { label: "University of Ohio Press (UO)", value: "UO" },
+  { label: "University of Indiana Press (UI)", value: "UI" },
+  { label: "University of Illinois Press (UI)", value: "UI" },
+  { label: "University of Michigan Press (UM)", value: "UM" },
+  { label: "University of Wisconsin Press (UW)", value: "UW" },
+  { label: "University of Minnesota Press (UMN)", value: "UMN" },
+  { label: "University of Iowa Press (UI)", value: "UI" },
+  { label: "University of Missouri Press (UM)", value: "UM" },
+  { label: "University of Arkansas Press (UA)", value: "UA" },
+  { label: "University of Louisiana Press (UL)", value: "UL" },
+  { label: "University of Texas Press (UT)", value: "UT" },
+  { label: "University of Oklahoma Press (UO)", value: "UO" },
+  { label: "University of Kansas Press (UK)", value: "UK" },
+  { label: "University of Nebraska Press (UN)", value: "UN" },
+  { label: "University of South Dakota Press (USD)", value: "USD" },
+  { label: "University of North Dakota Press (UND)", value: "UND" },
+  { label: "University of Montana Press (UM)", value: "UM" },
+  { label: "University of Idaho Press (UI)", value: "UI" },
+  { label: "University of Wyoming Press (UW)", value: "UW" },
+  { label: "University of Colorado Press (UC)", value: "UC" },
+  { label: "University of New Mexico Press (UNM)", value: "UNM" },
+  { label: "University of Arizona Press (UA)", value: "UA" },
+  { label: "University of Nevada Press (UN)", value: "UN" },
+  { label: "University of Utah Press (UU)", value: "UU" },
+  { label: "University of Washington Press (UW)", value: "UW" },
+  { label: "University of Oregon Press (UO)", value: "UO" },
+  { label: "University of California Press (UC)", value: "UC" },
+  { label: "University of Hawaii Press (UH)", value: "UH" },
+  { label: "University of Alaska Press (UA)", value: "UA" },
+  { label: "University of Puerto Rico Press (UPR)", value: "UPR" },
+  { label: "University of Virgin Islands Press (UVI)", value: "UVI" },
+  { label: "University of Guam Press (UG)", value: "UG" },
+  { label: "University of American Samoa Press (UAS)", value: "UAS" },
+  { label: "University of Northern Mariana Islands Press (UNMI)", value: "UNMI" },
+  { label: "University of Micronesia Press (UM)", value: "UM" },
+  { label: "University of Marshall Islands Press (UMI)", value: "UMI" },
+  { label: "University of Palau Press (UP)", value: "UP" },
+  { label: "University of Nauru Press (UN)", value: "UN" },
+  { label: "University of Tuvalu Press (UT)", value: "UT" },
+  { label: "University of Kiribati Press (UK)", value: "UK" },
+  { label: "University of Solomon Islands Press (USI)", value: "USI" },
+  { label: "University of Vanuatu Press (UV)", value: "UV" },
+  { label: "University of Fiji Press (UF)", value: "UF" },
+  { label: "University of Tonga Press (UT)", value: "UT" },
+  { label: "University of Samoa Press (US)", value: "US" },
+  { label: "University of Cook Islands Press (UCI)", value: "UCI" },
+  { label: "University of Niue Press (UN)", value: "UN" },
+  { label: "University of Tokelau Press (UT)", value: "UT" },
+  { label: "University of Pitcairn Islands Press (UPI)", value: "UPI" },
+  { label: "University of Norfolk Island Press (UNI)", value: "UNI" },
+  { label: "University of Christmas Island Press (UCI)", value: "UCI" },
+  { label: "University of Cocos Islands Press (UCI)", value: "UCI" },
+  { label: "University of Keeling Islands Press (UKI)", value: "UKI" },
+  { label: "University of Ashmore and Cartier Islands Press (UACI)", value: "UACI" },
+  { label: "University of Coral Sea Islands Press (UCSI)", value: "UCSI" },
+  { label: "University of Heard Island and McDonald Islands Press (UHIMI)", value: "UHIMI" },
+  { label: "University of Macquarie Island Press (UMI)", value: "UMI" },
+  { label: "University of Lord Howe Island Press (ULHI)", value: "ULHI" },
+  { label: "University of Norfolk Island Press (UNI)", value: "UNI" },
+  { label: "University of New Zealand Press (UNZ)", value: "UNZ"},
+      ];
+      $("#ticker").autocomplete({
+          source: availableTickers,
+          minLength: 2,
+          select: function(event, ui) {
+              $("#ticker").val(ui.item.value);
+              return false;
+          },
+          show: { effect: "slideDown", duration: 300 },
+          hide: { effect: "slideUp", duration: 300 }
+      });
+      $(".clear-icon").click(function() {
+          $("#ticker").val("");
+      });
+      $(".clear-icon").click(function() {
+          $("#ticker").val('');
+      });
+
+      $("#search-form").submit(function() {
+          $("#loading-screen").show();
+      });
+
+      $(window).on('load', function() {
+          $("#loading-screen").hide();
+      });
+  });
+  function updateTradingViewWidget(ticker) {
+            const widgetContainer = document.getElementById('tradingview-widget');
+            widgetContainer.innerHTML = ''; // Clear previous widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "width": "100%",
+                "height": "610",
+                "symbol": ticker,
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "light",
+                "style": "1",
+                "locale": "en",
+                "withdateranges": true,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "details": true,
+                "calendar": false,
+                "show_popup_button": true,
+                "popup_width": "100",
+                "popup_height": "100",
+                "support_host": "https://www.tradingview.com"
+            });
+
+            widgetContainer.appendChild(script);
+        }
+</script>
+
+<script>
+  // Get DOM elements
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.querySelector('.search-results');
+  const resultItems = document.querySelectorAll('.result-item');
+  
+  // Add event listeners
+  searchInput.addEventListener('input', handleSearch);
+  resultItems.forEach(item => {
+    item.addEventListener('click', () => {
+      searchInput.value = item.textContent;
+      searchResults.style.opacity = '0';
+      searchResults.style.visibility = 'hidden';
+      searchResults.style.transform = 'translateY(-10px)';
+      
+      // Simulate search action
+      setTimeout(() => {
+        alert(You searched for: ${searchInput.value});
+      }, 300);
+    });
+  });
+  
+  function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    
+    resultItems.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(searchTerm)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+<!-- ...end of search bar... -->
+
+
+<section class="chart">
+
+  <!-- TradingView Widget BEGIN -->
+  <div class="main-container">
+    <div class="left-column">
+        <!-- News Section -->
+        <section class="News">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+              {
+              "feedMode": "market",
+              "isTransparent": false,
+              "displayMode": "adaptive",
+              "width": 400,
+              "height": 550,
+              "colorTheme": "light",
+              "locale": "en",
+              "market": "stock"
+              }
+              </script>
+          </div>
+      </section>
+    </div>
+    <div class="right-column">
+        <!-- Existing content -->
+        
+        <section class="live-chart">
+            <!-- TradingView Widget END -->
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "width": "150%",
+                "height": "550",
+                "symbol": "NASDAQ:AAPL",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "light",
+                "style": "1",
+                "locale": "en",
+                "withdateranges": true,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "watchlist": [
+                "NASDAQ:TSLA",
+                "NASDAQ:MSFT",
+                "NASDAQ:AAPL"
+                ],
+                "details": true,
+                "calendar": false,
+                "show_popup_button": true,
+                "popup_width": "100",
+                "popup_height": "100",
+                "support_host": "https://www.tradingview.com"
+                }
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+        </section>
+    </div>
+</div>
+</section>
+
+<footer>
+  <div class="logo"><img src="{{ url_for('static', filename='img/FinBERT.png') }}" alt="FinBERT Logo" height="30" width="auto"></div>
+          <div class="footer-links">
+              <a href="/about-us">About Us</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="/contact-us">Contact Us</a>
+              <a href="#">FAQ</a>
+          </div>
+    <p class="disclaimer">
+        Investing in the stock market is subject to market risks. Read all scheme related documents carefully before investing. Past performance is not indicative of future returns.
+    </p>
+    <p>&copy; 2025 FinBERT</p>
+</footer>
+
+<script>
+    // JavaScript to hide the preloader with a delay
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.getElementById('preloader').style.display = 'none';
+        }, 3000); // Delay of 2000 milliseconds (2 seconds)
+    });
+</script>
+</body>
+</html>

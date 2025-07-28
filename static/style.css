@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+*  * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+body {
+   background-color: #f8f9fa;
+   color: #333;
+  }
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f7f4f4;
+  color: white;
+}
+
+.navbar .logo img {
+  height: 60px;
+  margin-left: 50px;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 30px;
+  margin-right: 40px;
+}
+
+.navbar .nav-links a {
+  color: rgb(10, 10, 10);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.rp{
+border-radius: 30px;
+background-color: rgb(185, 177, 177);
+color: black;
+border: 0ch;
+padding: 8px 12px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+transition-duration: 0.4s;
+cursor: pointer; 
+
+}
+
+.rp:hover {
+background-color: green;
+color: black;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #333;
+  text-align: center;
+}
+
+
+.indices-container {
+  display: flex;
+  margin-left: 30px;
+
+}
+
+.index {
+  flex: 1;
+  margin: 10px; /* Adjust the margin as needed */
+  min-width: 300px; /* Ensure the widgets don't shrink below their width */
+}
+
+/* ...search bar... */
+
+.search-container {
+  position: relative;
+  width: 500px;
+  height: 50px;;
+  margin: 20px auto;
+  /*margin-left: 450px;*/
+  transition: all 0.3s ease;
+}
+
+.search-container:hover {
+  transform: translateY(-2px);
+}
+
+.search-container input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 350px;
+}
+
+.search-container .search-btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.text-center-icon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.search-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.search-icon::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 13px;
+  width: 2px;
+  height: 8px;
+  background: #666;
+  transform: rotate(-45deg);
+  transition: all 0.3s ease;
+}
+
+.search-container input:focus + .search-btn .search-icon::before {
+  border-color: #3498db;
+}
+
+.search-container input:focus + .search-btn .search-icon::after {
+  background: #3498db;
+}
+
+.search-results {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.search-container input:focus ~ .search-results {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  width: 350px;
+}
+
+.result-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.result-item:hover {
+  background: #f5f5f5;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.pulse {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(52, 152, 219, 0.3);
+  opacity: 0;
+  z-index: 0;
+}
+
+.search-container input:focus ~ .pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* ...end of search bar... */
+
+ footer {
+   background-color: #333;
+   color: white;
+   padding: 40px;
+   text-align: center;
+}
+
+
+.footer-links {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   gap: 30px;
+   margin: 20px 0;
+}
+
+.footer-links a {
+   text-decoration: none;
+   color: #ddd;
+   
+}
+
+.disclaimer {
+   
+   font-size: 0.9rem;
+   color: #aaa;
+   max-width: 800px;
+   margin: 20px auto;
+}
+
+       /* ...existing code... */
+
+.tradingview-widget {
+   padding: 0px;
+   background-color: #f5f5f5;
+   margin: 100px auto; /* Center the widget */
+   max-width: 1000px; /* Set a maximum width */
+}
+
+.tradingview-widget-container {
+   height: 400px; /* Adjust the height as needed */
+   width: 100%;
+}
+
+.tradingview-widget-container__widget {
+   height: 100%;
+   width: 100%;
+}
+
+.main-container {
+   display: flex;
+   justify-content: space-between;
+}
+
+.left-column {
+   width: 50%;
+   padding: 20px;
+ 
+   margin-left: 20px;
+}
+
+.right-column {
+   width: 70%;
+   padding: 20px;
+   margin-right: 470px;
+
+}
+
+.news-section {
+   background-color: #f9f9f9;
+   padding: 20px;
+   border-radius: 8px;
+}
+
+.news-item {
+   margin-bottom: 10px;
+}
+
+
+/* ...existing code...pre loader */
+
+#preloader {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 9999;
+   background: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#preloader img {
+   width: auto; /* Adjust the size as needed */
+}
+
+/* ...existing code... */
+
+
+/*............result.html...............*/
+
+.table-responsive {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+/*............End result.html...............*/
+
+
+.data {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data th, .data td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+   .navbar {
+       padding: 15px 20px;
+       flex-direction: column;
+       gap: 15px;
+   }
+
+   .hero {
+       padding: 40px 20px;
+   }
+
+   .hero h1 {
+       font-size: 2rem;
+   }
+
+   .features, .market-section {
+       padding: 40px 20px;
+   }
+
+   .tradingview-widget {
+       padding: 20px;
+       margin: 50px auto; /* Adjust margin for smaller screens */
+   }
+
+   .tradingview-widget-container {
+       height: 300px; /* Adjust height for smaller screens */
+   }
+}
+
+/* ...existing code... */

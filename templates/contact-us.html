@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <title>Document</title>
+</head>
+<body>
+     <!-- Preloader -->
+    <div id="preloader">
+        <img src="{{ url_for('static', filename='img/FinBERT.gif') }}" alt="Loading...">
+    </div>
+
+    <nav class="navbar">
+      <div class="logo"><img src="{{ url_for('static', filename='img/FinBERT.png') }}" alt="FinBERT Logo"></div>
+      <div class="nav-links">
+        <a class="rp" href="/">Home</a>
+        <a class="rp" href="https://www.moneycontrol.com/indian-indices/sensex-4.html">Sensex</a>
+        <a class="rp" href="/about-us">About Us</a>
+        <a class="rp" href="/contact-us">Contact Us</a>
+        
+    </div>
+            
+        </div>
+    </nav>
+
+    <!-- ...existing code... -->
+
+
+    <header>
+        <h1>Contact Us</h1>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 30px auto;">We'd love to hear from you! Please fill out the form below or use our contact information to get in touch with our team.</p>
+    </header>
+
+    <div class="contact-container">
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject">
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Technical Support</option>
+                        <option value="sales">Sales</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <div class="info-item">
+                <i>📍</i> <strong>Address:</strong><br>
+                Collage of engineering vadakara<br>
+                maniyoor<br>
+                vadakara, calicut<br>
+                kerala,INDIA
+            </div>
+            <div class="info-item">
+                <i>📞</i> <strong>Phone:</strong><br>
+                Main: +91 6238379445<br>
+                Support: (555) 987-6543
+            </div>
+            <div class="info-item">
+                <i>✉️</i> <strong>Email:</strong><br>
+                General: finbert@gmail.com<br>
+                Support: finbertsupport@gmai.com<br>
+            </div>
+            
+            <h2 style="margin-top: 30px;">Follow Us</h2>
+            <div class="social-links">
+                <a href="#" title="Facebook">FB</a>
+                <a href="#" title="Twitter">TW</a>
+                <a href="#" title="Instagram">IG</a>
+                <a href="#" title="LinkedIn">LI</a>
+                <a href="#" title="YouTube">YT</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically add code to handle the form submission
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+
+
+    <footer>
+        <div class="logo"><img src="{{ url_for('static', filename='img/FinBERT.png') }}" alt="FinBERT Logo" height="30" width="auto"></div>
+          <div class="footer-links">
+              <a href="/about-us">About Us</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="/contact-us">Contact Us</a>
+              <a href="#">FAQ</a>
+          </div>
+          <p class="disclaimer">
+              Investing in the stock market is subject to market risks. Read all scheme related documents carefully before investing. Past performance is not indicative of future returns.
+          </p>
+          <p>&copy; 2025 FinBERT</p>
+      </footer>
+
+
+      <script>
+        // JavaScript to hide the preloader with a delay
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').style.display = 'none';
+            }, ); // Delay of 2000 milliseconds (2 seconds)
+        });
+    </script>
+
+</body>
+</html>
